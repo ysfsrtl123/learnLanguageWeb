@@ -1,6 +1,6 @@
 doctype html
 html(lang="de")
-  block  content
+  block content
     include ../views/includes/head.pug
     style.
       body {
@@ -34,25 +34,75 @@ html(lang="de")
         width: 100%;
         z-index: 9999;
       }
-
-  body
-    #spinner-container.spinner-container
-      .spinner-border(role="status")
-        span.visually-hidden Loading...
-
-    block content
-      include ../views/includes/nav.pug
-
-      main.container.my-5
-      
-
-      include ../views/includes/footer.pug
-
-    script.
-      document.addEventListener('DOMContentLoaded', function() {
-          document.getElementById('spinner-container').style.display = 'none';
-      });
-
-      function showSection(sectionId) {
-        document.getElementById(sectionId).classList.remove('hidden');
+      .carousel-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
       }
+
+    body
+      #spinner-container.spinner-container
+        .spinner-border(role="status")
+          span.visually-hidden Loading...
+
+      block content
+        include ../views/includes/nav.pug
+        .container-fluid.my-1
+          .row
+            .col-auto.me-auto
+              ul.list-group.rounded-3.mb-5
+                li.list-group-item
+                  h1 Die Inhalte
+                  hr
+                li.list-group-item
+                  a(href="") Die Nachrichten
+                li.list-group-item
+                  a(href="") Wie lernt man Deutsch?
+                li.list-group-item
+                  a(href="") Wer sind wir?
+                li.list-group-item
+                  a(href="") Wer sind wir?
+                li.list-group-item
+                  a(href="") Wer sind wir?
+                li.list-group-item
+                  a(href="") Wer sind wir?
+                li.list-group-item
+                  a(href="") Wer sind wir?
+                li.list-group-item
+                  a(href="") Wer sind wir?
+            .col.mb-5.my-2
+              #carouselExampleDark.carousel.carousel-dark.slide
+                .carousel-indicators
+                  button(type="button", data-bs-target="#carouselExampleDark", data-bs-slide-to="0", class="active", aria-current="true", aria-label="Slide 1")
+                  button(type="button", data-bs-target="#carouselExampleDark", data-bs-slide-to="1", aria-label="Slide 2")
+                  button(type="button", data-bs-target="#carouselExampleDark", data-bs-slide-to="2", aria-label="Slide 3")
+                
+                .carousel-inner.rounded-4.bg-white
+                  .carousel-item.active(data-bs-interval="10000")
+                    img(src="https://placehold.co/900x600", class="d-block w-100", alt="...")
+                    .carousel-caption.d-none.d-md-block
+                      h5 First slide label
+                      p Some representative placeholder content for the first slide.
+                  
+                  .carousel-item(data-bs-interval="2000")
+                    img(src="https://placehold.co/900x600", class="d-block w-100", alt="...")
+                    .carousel-caption.d-none.d-md-block
+                      h5 Second slide label
+                      p Some representative placeholder content for the second slide.
+                  
+                  .carousel-item
+                    img(src="https://placehold.co/900x600", class="d-block w-100", alt="...")
+                    .carousel-caption.d-none.d-md-block
+                      h5 Third slide label
+                      p Some representative placeholder content for the third slide.
+
+        include ../views/includes/footer.pug
+
+      script.
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('spinner-container').style.display = 'none';
+        });
+
+        function showSection(sectionId) {
+          document.getElementById(sectionId).classList.remove('hidden');
+        }
