@@ -8,6 +8,7 @@ html
         flex-direction: column;
         min-height: 100vh;
         background-color: red;
+        margin: 0;
       }
       main {
         flex: 1;
@@ -15,6 +16,8 @@ html
       footer {
         background-color: #ffc107;
         color: white;
+        text-align: center;
+        padding: 1rem;
       }
       a {
         text-decoration: none;
@@ -39,11 +42,24 @@ html
       .spinner-border(role="status")
         span.visually-hidden Loading...
 
-    block content
-      include ../views/includes/nav.pug
+    include ../views/includes/nav.pug
 
-      main.container.my-5
-        block content
+    main.container-fluid.my-1
+      .row
+        .col-auto.me-auto
+          ul.list-group.rounded-3.mb-5
+            li.list-group-item
+              h1 Übungsinhalte
+              hr
+            li.list-group-item
+              a(href="") Test
+            li.list-group-item
+              a(href="") Lückentext
+            li.list-group-item
+              a(href="") Weitere Übung
+            li.list-group-item
+              a(href="") Noch eine Übung
+        .col.mb-5.my-5
           include ../views/includes/quiz.pug
 
     include ../views/includes/footer.pug
