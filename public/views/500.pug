@@ -1,0 +1,46 @@
+doctype html 
+html(lang="de")
+block content 
+     include ../views/includes/head.pug 
+title= pageTitle 
+style.
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: red;
+      }
+      main {
+        flex: 1;
+      }
+      footer {
+        background-color: #ffc107;
+        color: white;
+      }
+      a {
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      .spinner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+      }
+body 
+ block content 
+     include ../views/includes/nav.pug
+     h1.h1 Something Broke!
+ main.container.my-5
+   
+
+block content 
+     include ../views/includes/footer.pug

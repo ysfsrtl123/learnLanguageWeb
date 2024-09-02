@@ -1,0 +1,16 @@
+section
+  .row.justify-content-center
+    .col-md-8
+      h1.text-center.mb-4 
+
+       if currentWord.q
+        p Kelime: #{currentWord.q}
+       else
+        p Kelime Bulunmamaktadır
+
+      
+      form(action="/ubungen", method="POST")
+        .input-group.input-group-sm.mb-3
+          input.form-control(name="answer", aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Cevap")
+        .d-flex.justify-content-between
+          button.btn.btn-primary(type="submit", name="action", value="next") Sonraki

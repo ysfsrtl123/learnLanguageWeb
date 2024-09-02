@@ -1,0 +1,7 @@
+{
+    "path-intellisense.autoSlashAfterDirectory": true,
+    "path-intellisense.autoTriggerNextSuggestion": true,
+    "path-intellisense.extensionOnImport": true,
+    "path-intellisense.ignoreTsConfigBaseUrl": true,
+    "path-intellisense.showHiddenFiles": true
+}

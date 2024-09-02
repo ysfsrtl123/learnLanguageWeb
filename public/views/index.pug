@@ -1,0 +1,58 @@
+doctype html
+html(lang="de")
+  block  content
+    include ../views/includes/head.pug
+    style.
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: red;
+      }
+      main {
+        flex: 1;
+      }
+      footer {
+        background-color: #ffc107;
+        color: white;
+      }
+      a {
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      .spinner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+      }
+
+  body
+    #spinner-container.spinner-container
+      .spinner-border(role="status")
+        span.visually-hidden Loading...
+
+    block content
+      include ../views/includes/nav.pug
+
+      main.container.my-5
+      
+
+      include ../views/includes/footer.pug
+
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('spinner-container').style.display = 'none';
+      });
+
+      function showSection(sectionId) {
+        document.getElementById(sectionId).classList.remove('hidden');
+      }

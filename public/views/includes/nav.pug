@@ -1,0 +1,28 @@
+.container-fluid.bg-dark.p-3
+  nav.navbar.navbar-expand-lg.navbar-dark
+    .container-fluid
+      a.navbar-brand(href="#") 
+        b 
+          i= navbarTitle
+      button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarNav
+        ul.navbar-nav.ms-auto
+          li.nav-item 
+            a.nav-link.mx-2(href=(isAdmin ? '/' : '/admin') class=(path === '/admin' ? 'nav-link active' : 'nav-link')) 
+               asd  Admin
+          li.nav-item
+            a.nav-link(href=(isAdmin ? '/admin' : '/') class=(path === '/' ? 'nav-link active' : 'nav-link'))
+              i.bi.bi-house-door-fill
+              |  Startseite
+          li.nav-item
+            a.nav-link(href=(isAdmin ? '/admin/about' : '/about') class=(path === '/about' || path === 'admin/about' ? 'nav-link active' : 'nav-link'))
+              | Über uns
+          li.nav-item
+            a.nav-link(href=(isAdmin ? "/admin/ubungen" : "/ubungen") class=(path === '/ubungen' || path === 'admin/ubungen' ? 'nav-link active' : 'nav-link'))
+              i.bi.bi-journal-check
+              if isAdmin
+                |  Wörter hinzufügen
+              else
+                |  Übungen
+              

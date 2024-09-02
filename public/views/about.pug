@@ -1,0 +1,61 @@
+doctype html
+html(lang="de")
+  head
+    include ../views/includes/head.pug
+    style.
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: red;
+      }
+      main {
+        flex: 1;
+      }
+      footer {
+        background-color: #ffc107;
+        color: white;
+      }
+      a {
+        text-decoration: none;
+      }
+      .spinner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+      }
+  body
+    #spinner-container.spinner-container
+      .spinner-border(role="status")
+        span.visually-hidden Loading...
+    .container-fluid.bg-dark.p-3
+      block content 
+        include ../views/includes/nav.pug 
+
+    main.container.my-5
+      section
+        .container-md-fluid.border.border-dark
+          h2.text-center.text-white Über Uns
+          .text-center.text-white.mt-3.my-3.mx-3.p-3
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores unde esse minima dolores iusto nemo dolor voluptate corrupti, delectus non. Id mollitia repellat doloribus quas dolores? Nisi quae recusandae nemo ad amet ex pariatur dolor atque dignissimos repellendus perspiciatis quisquam ullam error, sint porro, odio explicabo sit, ipsam suscipit dolorem asperiores cupiditate? Magni earum voluptates, illo expedita recusandae minima rem velit accusantium quisquam impedit nisi neque quos cumque.
+            br 
+            | Distinctio omnis ea temporibus commodi possimus error consequatur ipsum enim? Non delectus dolores numquam magnam veniam ipsam, quis totam harum sequi atque cum magni aut labore modi aliquid necessitatibus molestiae officia.
+            br 
+            | Voluptatum cumque ipsa? Possimus perspiciatis ipsam, quam quae laudantium quasi voluptatibus labore! Aspernatur pariatur libero a rem praesentium voluptatibus tempore saepe id reiciendis incidunt officiis alias beatae ipsa minus, asperiores vitae dolor hic velit consequatur quasi.
+            br
+            | Doloribus culpa iusto, illo numquam quidem omnis. Animi dolorem quos enim suscipit doloribus consequuntur rem vero doloremque, obcaecati nobis eius cumque inventore sapiente iusto veniam dolorum tempora sequi eos distinctio itaque illum consequatur dicta eligendi. Soluta repellat debitis dolores molestias animi voluptatum fugiat recusandae, illo quidem dicta! Sint sunt accusamus autem optio eos consectetur, quis, reiciendis at consequuntur, in debitis ducimus culpa aliquid. Consequuntur, cum.
+
+    block content 
+      include ../views/includes/footer.pug 
+          
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('spinner-container').style.display = 'none';
+      });
