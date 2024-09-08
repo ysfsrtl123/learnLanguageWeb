@@ -37,29 +37,19 @@ html
         width: 100%;
         z-index: 9999;
       }
+
   body
     #spinner-container.spinner-container
       .spinner-border(role="status")
         span.visually-hidden Loading...
 
     include ../views/includes/nav.pug
-
-    main.container-fluid.my-1
+    
+    .container-md
       .row
-        .col-auto.me-auto
-          ul.list-group.rounded-3.mb-5
-            li.list-group-item
-              h1 Übungsinhalte
-              hr
-            li.list-group-item
-              a(href="") Test
-            li.list-group-item
-              a(href="") Lückentext
-            li.list-group-item
-              a(href="") Weitere Übung
-            li.list-group-item
-              a(href="") Noch eine Übung
-        .col.mb-5.my-5
+        .col-md-3.mt-5.mb-5.my-5
+          include ../views/includes/category.pug
+        .col-md-8.mt-5.my-5
           include ../views/includes/quiz.pug
 
     include ../views/includes/footer.pug

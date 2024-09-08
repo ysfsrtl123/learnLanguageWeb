@@ -3,14 +3,17 @@ section
     .col-md-8
       h1.text-center.mb-4 
 
-       if currentWord.q
-        p Kelime: #{currentWord.q}
+       if currentWord.message
+        p.text-center #{currentWord.message}
+        form(action="/reset", method="POST")
+          a(href="/").btn.btn-primary.mx-3 Anasayfa
+          button.btn.btn-secondary(type="submit") Tekrar Başla
        else
-        p Kelime Bulunmamaktadır
+        p.text-center Kelime: #{currentWord.word}
 
-      
-      form(action="/ubungen", method="POST")
-        .input-group.input-group-sm.mb-3
-          input.form-control(name="answer", aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Cevap")
-        .d-flex.justify-content-between
-          button.btn.btn-primary(type="submit", name="action", value="next") Sonraki
+       if !currentWord.message
+        form(action="/ubungen", method="POST")
+          .input-group.input-group-sm.mb-3
+            input.form-control(name="answer", aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Cevap")
+          .d-flex.justify-content-between
+            button.btn.btn-primary(type="submit", name="action", value="next") Sonraki

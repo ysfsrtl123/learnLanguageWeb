@@ -3,24 +3,33 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const adminRoutes = require('./routes/admin'); // Admin route dosyasının yolu
-const homeRoutes = require('./routes/user');   // Home route dosyasının yolu
+const adminRoutes = require('./routes/admin'); 
+const homeRoutes = require('./routes/user');  
 
-// Path bilgilerini takip etmek için bir middleware
+const connection = require('../public/utility/database');
+
 app.use((req, res, next) => {
     console.log(`Path: ${req.path}`);
-    next(); // Bir sonraki middleware veya route handler'a geçiş
+    next(); 
 });
 
-app.use(express.static(path.join(__dirname, 'public'))); // Public dizinini statik olarak ayarlamak
-app.set('view engine', 'pug'); // Pug template engine ayarlaması
-app.set('views', path.join(__dirname, 'views')); // Views dizini
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views')); 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/admin', adminRoutes); // Admin rotalarını '/admin' altına ekler
 app.use('/', homeRoutes); // Home rotalarını root olarak ekler
+
+connection.execute('SELECT * FROM word')
+     .then((result) => {
+        console.log(result);
+     }).catch((err) => {
+        console.log(err);
+     });
 
 app.use((req, res) => {
     res.status(404).render('404', { pageTitle: 'Seite nicht gefunden' });
