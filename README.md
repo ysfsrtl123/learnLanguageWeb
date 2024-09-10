@@ -39,4 +39,4 @@ Da ich derzeit Deutsch lerne, wollte ich ein Projekt erstellen, das mir nicht nu
 #### Warum ist das Design anders?
 Ich wollte, dass das Design sich von anderen Deutsch-Lernseiten abhebt. Ich hätte ein konventionelleres Design wählen können, aber ich habe mich für diesen Ansatz entschieden, um meinem persönlichen Projekt eine einzigartige Note zu verleihen.
 
-#Please send your comments and suggestions to this email:yusufsertel460@gmail.com
+# Please send your comments and suggestions to this email: yusufsertel460@gmail.com
