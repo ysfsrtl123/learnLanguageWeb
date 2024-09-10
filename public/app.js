@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const adminRoutes = require('./routes/admin'); 
 const homeRoutes = require('./routes/user');  
 
-const connection = require('../public/utility/database');
+const connection = require('./utility/database');
 
 app.use((req, res, next) => {
     console.log(`Path: ${req.path}`);

@@ -1,7 +1,9 @@
-const { Word,words } = require('../model/word.js');
+const { Word } = require('../model/word.js');
+const Category = require('../model/category.js');
 
 exports.getAdminHome = (req, res, next) => {
     const navbarTitle = 'Admin Login';
+    const Categories = Category.getAllCategories();
     res.render('index', {
         navbarTitle,
         title: 'Admin Login',
@@ -22,55 +24,83 @@ exports.getAdminAbout = (req, res, next) => {
 
 exports.getAdminUbungen = (req, res, next) => {
     const navbarTitle = 'Admin Übungen';
-    const words = Word.getAllWords(); 
-    res.render('add', {
-        navbarTitle,
-        words,
-        title: 'Admin Übungen',
-        path: '/admin/ubungen',
-        isAdmin: true 
+    Word.getAllWords().then(([rows]) => {
+        res.render('add', {
+            navbarTitle,
+            word: rows, // 'word' yerine 'rows' verisini geçiyoruz
+            title: 'Admin Übungen',
+            path: '/admin/ubungen',
+            isAdmin: true
+        });
     });
 };
 
+    
+
+
 exports.postaddword = (req, res, next) => {
-    const word = new Word(
-        null, 
-        req.body.q,
-        req.body.addAnswer
-    );
+    const word = req.body.word;
+    const answer = req.body.addAnswer;
 
-    console.log('Kelime:', req.body.q);
+    
+
+    Word.addWord(word, answer)
+    .then(()=> {
+    console.log('Kelime:', req.body.word);
     console.log('Cevap:', req.body.addAnswer);
-
-    word.addWord();
-    console.log('Eklenen Kelime:', JSON.stringify(word, null, 2));
-    res.redirect('/admin/ubungen');
+    console.log('Kelime Ve Cevabı Başarı İle Eklendi.');
+     res.redirect('/admin/ubungen');
+    })
+    .catch((err) => {
+        console.log('Kelimeler Eklenemedi Bİrşeyler Ters Gitti!'+''+err);
+    })
+    
 };
 
 exports.postDeleteWord = (req,res,next) => {
     const wordId = parseInt(req.params.id); 
 
-    Word.deleteWord(wordId);
-    res.redirect('/admin/ubungen');
+    Word.deleteWord(wordId).then(() => {
+        console.log('ögeler başarıyla silindi.');
+      res.redirect('/admin/ubungen?success=deleted');
+    }).catch(err => {
+        console.log('Birşeyler ters gitti!');
+    });
+   
 };
 
 exports.getUpdateWord = (req, res, next) => {
     const wordId = parseInt(req.params.id);
-    const word = Word.getWordById(wordId); 
     const navbarTitle = 'Admin Update';
-    if (!word) {
-        return res.status(404).render('404', { title: 'Kelime Bulunamadı' });
-    }
-    res.render('update', { title: 'Kelime Güncelle', navbarTitle, word: word });
+
+    
+    Word.getWordById(wordId).then(([rows]) => {
+        const word = rows[0]; 
+
+        if (!word) {
+            return res.status(404).render('404', { title: 'Kelime Bulunamadı' });
+        }
+        res.render('update', { title: 'Kelime Güncelle', navbarTitle, word: word });
+    }).catch(err => {
+        console.log(err);
+    });
 };
+
 
 exports.postUpdateWord = (req, res, next) => {
-    const wordId = parseInt(req.params.id);
+    console.log(req.body);
+
+    const wordId = req.params.id;
     const updatedWord = {
-        q: req.body.q,
-        answer: req.body.answer
+        word: req.body.updateWord,
+        answer: req.body.updateAnswer
     };
 
-    Word.updateWord(wordId, updatedWord); 
-    res.redirect('/admin/ubungen');
+    Word.updateWord(wordId, updatedWord).then(() => {
+        res.redirect('/admin/ubungen?success=updated');
+        console.log('veri başarı ile güncellendi!')
+    }).catch(err => {
+        console.log(err);
+    });
 };
+

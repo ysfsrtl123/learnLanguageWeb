@@ -50,14 +50,15 @@ html(lang="de")
             th Kelime
             th Cevap
         tbody
-          each word in words || []
+          each Word in word || []
             tr 
               td= word.id 
-              td= word.q
+              td= word.word
               td= word.answer
+
       form(action=`/admin/ubungen/update/${word.id}` method="POST")
         .input-group.input-group-sm.mb-3
-          input.form-control(name="updateWord" value=word.q aria-label="Kelime" placeholder="Güncellemek için kelime")
+          input.form-control(name="updateWord" value=word.word aria-label="Kelime" placeholder="Güncellemek için kelime")
         .input-group.input-group-sm.mb-3
           input.form-control(name="updateAnswer" value=word.answer aria-label="Cevap" placeholder="Güncellemek için cevap")
         .d-flex.justify-content-between

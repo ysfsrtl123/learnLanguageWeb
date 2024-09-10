@@ -52,8 +52,10 @@ html
       }
   body
     include ../views/includes/nav.pug
+    
     main.container.my-5
-      table.table
+      h1.text-center.border.border-dark Admin Yönetim Paneli
+      table.table.mt-4
         thead
           tr
             th id
@@ -61,25 +63,44 @@ html
             th Cevap
             th Güncelle/Sil
         tbody
-          each word in words || []
+          each Word in word 
             tr 
-              td= word.id 
-              td= word.q
-              td= word.answer
-              td 
-                form(action=`/admin/ubungen/update/${word.id}` method="GET" style="display: inline;")
+              td= Word.id 
+              td= Word.word
+              td= Word.answer
+              td
+                form(action=`/admin/ubungen/update/${Word.id}` method="GET" style="display: inline;")
                   input(type="hidden" name="_update" value="UPDATE")
                   button.btn.btn-primary.mx-2(type="submit") Güncelle 
-                form(action=`/admin/ubungen/${word.id}` method="POST" style="display: inline;")
+                form(action=`/admin/ubungen/${Word.id}` method="POST" style="display: inline;")
                   input(type="hidden" name="_method" value="DELETE")
                   button.btn.btn-danger(type="submit") Sil
 
       form(action="/admin/ubungen" method="POST")
         .input-group.input-group-sm.mb-3
-          input.form-control(name="q" aria-label="Sizing input" aria-describedby="inputGroup-sizing-sm" placeholder="Kelime ekle")
+          input.form-control(name="word" id="word" aria-label="Sizing input" aria-describedby="inputGroup-sizing-sm" placeholder="Kelime ekle" required)
         .input-group.input-group-sm.mb-3
-          input.form-control(name="addAnswer" aria-label="Sizing input" aria-describedby="inputGroup-sizing-sm" placeholder="Cevabı ekle")
+          input.form-control(name="addAnswer" id="answer" aria-label="Sizing input" aria-describedby="inputGroup-sizing-sm" placeholder="Cevabı ekle" required)
         .d-flex.justify-content-between
           button.btn.btn-primary.mt-2(type="submit") Ekle 
 
     include ../views/includes/footer.pug
+
+    
+    script.
+      document.getElementById('wordInput').addEventListener('keydown', function (e) {
+        const word = document.getElementById('word').value;
+        const answer = document.getElementById('answer').value;
+      
+      });
+    
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'updated') {
+          alert('Öge başarı ile güncellendi!');
+        }
+        else if (urlParams.get('success') === 'deleted') {
+          alert('Öğe başarıyla silindi!');
+        }
+      });

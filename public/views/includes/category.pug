@@ -2,7 +2,7 @@ ul.list-group.rounded-3.mb-5
   li.list-group-item
     h1 Die Inhalte
     hr
-  if categories.length > 0
+  if  categories && categories.legth > 0
     each Category in categories
       li.list-group-item
         a(href=`/categories/${Category.name}`) #{Category.description}
