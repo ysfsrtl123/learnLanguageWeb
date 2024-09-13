@@ -9,5 +9,5 @@ const connection = mysql.createConnection({
     user: '****',
     password: '****',
     database: '*****'
-
+});
 module.exports = connection.promise();
